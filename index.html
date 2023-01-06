@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <title>Type Script Exercise</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-lg-6">
+        <div class="d-flex justify-content-center m-3">
+          <form id="form-places">
+            <div class="mb-1">
+              <label for="cityData" class="form-label">City Name</label>
+              <input type="text" class="form-control" id="cityData" placeholder="Pasig" />
+            </div>
+            <div class="mb-1">
+              <label for="countryData" class="form-label">Country</label>
+              <input type="text" class="form-control" id="countryData" placeholder="Philippines" />
+            </div>
+            <div class="mb-1">
+              <label for="populationData" class="form-label">Population</label>
+              <input type="number" class="form-control" id="populationData" placeholder="100" />
+            </div>
+            <button type="submit" class="btn btn-primary"
+              onclick="saveData(document.getElementById('cityData').value, document.getElementById('countryData').value, document.getElementById('populationData').valueAsNumber);">Add</button>
+          </form>
+        </div>
+        <div class="d-flex justify-content-center m-3">
+          <div class="mt-3">
+            <div class="input-group">
+              <input type="search" class="form-control rounded" id="search-values" placeholder="Search" />
+              <button type="button" class="btn btn-outline-primary"
+                onclick="showSearchResult(document.getElementById('search-values').value);">
+                search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mt-3 pb-5">
+        <div class="d-flex justify-content-center ">
+          <ul class="list-group  w-75" id="list-of-cities">
+            <li class="list-group-item active">List of Cities</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var exports = { __esModule: { value: true } };
+  </script>
+  <script src="./index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

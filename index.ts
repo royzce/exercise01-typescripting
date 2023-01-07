@@ -61,11 +61,14 @@ function showSearchResult(searchString: string) {
       let itemCity = JSON.parse(localStorage.getItem("mergedCityInfo") || "{}")[
         i
       ];
-      var hasValueInCityOrCountry: boolean = itemCity
-        .toUpperCase()
-        .includes(searchString.toLocaleUpperCase());
+      var indexOfPopulation: number = itemCity.lastIndexOf(',')
+      var cityCountry = itemCity.substring(0, indexOfPopulation)
+      var arrayCityCountry = cityCountry.split(', ').map(String)
 
-      if (hasValueInCityOrCountry) {
+      var persentInCity: boolean = arrayCityCountry[0].toUpperCase().includes(searchString.toLocaleUpperCase());
+      var persentInCountry: boolean = arrayCityCountry[1].toUpperCase().includes(searchString.toLocaleUpperCase());
+
+      if (persentInCity || persentInCountry) {
         document.getElementById(
           "list-of-cities"
         )!.innerHTML += `<li class="list-group-item">${itemCity}</li>`;
@@ -76,36 +79,36 @@ function showSearchResult(searchString: string) {
 
 // Number 2 - ISBN – 10 Validation
 
-function validateISBN(isbn: string):boolean {
-  if (!isbn) { 
+function validateISBN(isbn: string): boolean {
+  if (!isbn) {
     return false;
   }
   var stringArray = isbn.split('').map(String);
-  if(stringArray.length != 10){
+  if (stringArray.length != 10) {
     return false
   }
-  var addISBN:number =0
-  var temp:number
-  
+  var addISBN: number = 0
+  var temp: number
+
   for (let i = 0; i < 10; i++) {
-    
-    if((stringArray[i] == "x" || stringArray[i] == "X") && i!=9){
-      
+
+    if ((stringArray[i] == "x" || stringArray[i] == "X") && i != 9) {
+
       return false;
-    }else{
-      if(stringArray[i] == "x" || stringArray[i] == "X"){
-        stringArray[i] ='10'
+    } else {
+      if (stringArray[i] == "x" || stringArray[i] == "X") {
+        stringArray[i] = '10'
       }
     }
-    temp=+stringArray[i]
-    if(isNaN(temp)){
+    temp = +stringArray[i]
+    if (isNaN(temp)) {
       return false;
     }
-    addISBN += temp*(i+1)
+    addISBN += temp * (i + 1)
   }
-  var computesISBN = (addISBN)%11
+  var computesISBN = (addISBN) % 11
 
-  if(computesISBN==0){
+  if (computesISBN == 0) {
     return true;
   }
 
@@ -113,9 +116,9 @@ function validateISBN(isbn: string):boolean {
 
 }
 // input test values here
-var testValue:string = '1234554321'
+var testValue: string = '1234554321'
 
-console.log(testValue + ' -> ' +validateISBN(testValue))
+console.log(testValue + ' -> ' + validateISBN(testValue))
 
 
 // Number 3 - Change it up!
@@ -126,17 +129,17 @@ function changeItUp(input: string): string {
   }
   var stringArray = input.split('').map(String);
   var charUpper1;
-  
-  for (var i=0; i<stringArray.length; i++) {
+
+  for (var i = 0; i < stringArray.length; i++) {
     charUpper1 = stringArray[i].toUpperCase()
-    if(charUpper1.charCodeAt(0) == 90){
+    if (charUpper1.charCodeAt(0) == 90) {
       stringArray[i] = "A"
-    }else if (charUpper1.charCodeAt(0) <= 89 && charUpper1.charCodeAt(0)>= 65){
-      stringArray[i] = String.fromCharCode(charUpper1.charCodeAt(0)+1);
+    } else if (charUpper1.charCodeAt(0) <= 89 && charUpper1.charCodeAt(0) >= 65) {
+      stringArray[i] = String.fromCharCode(charUpper1.charCodeAt(0) + 1);
       var charUpper2 = stringArray[i].toUpperCase()
-      if(charUpper2 == 'A' || charUpper2 == 'E' || charUpper2 == 'I' || charUpper2 == 'O' || charUpper2 == 'U'){
+      if (charUpper2 == 'A' || charUpper2 == 'E' || charUpper2 == 'I' || charUpper2 == 'O' || charUpper2 == 'U') {
         stringArray[i] = charUpper2
-      }else{
+      } else {
         stringArray[i] = stringArray[i].toLowerCase()
       }
     }
@@ -151,22 +154,22 @@ console.log(changeItUp(testValue2))
 // Number 4 - Moving zeroes to the end
 
 
-function moveZeros(params:any){
-  if(!params){
+function moveZeros(params: any) {
+  if (!params) {
     return ''
   }
   let inputArray = params
-  let temp:any;
+  let temp: any;
   for (let i = 0; i < inputArray.length; i++) {
-    if (inputArray[i]=== 0 ) {
+    if (inputArray[i] === 0) {
 
-      for(let j = i; j < inputArray.length; j++){
+      for (let j = i; j < inputArray.length; j++) {
         temp = inputArray[j]
-        if(j+1>= inputArray.length){
+        if (j + 1 >= inputArray.length) {
           break
         }
-        inputArray[j] = inputArray[j+1]
-        inputArray[j+1] = temp
+        inputArray[j] = inputArray[j + 1]
+        inputArray[j + 1] = temp
       }
 
     }

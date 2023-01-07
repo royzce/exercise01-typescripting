@@ -39,10 +39,12 @@ function showSearchResult(searchString) {
         var lengthOfDataArray = JSON.parse(localStorage.getItem("mergedCityInfo") || "{}").length;
         for (let i = 0; i < lengthOfDataArray; i++) {
             let itemCity = JSON.parse(localStorage.getItem("mergedCityInfo") || "{}")[i];
-            var hasValueInCityOrCountry = itemCity
-                .toUpperCase()
-                .includes(searchString.toLocaleUpperCase());
-            if (hasValueInCityOrCountry) {
+            var indexOfPopulation = itemCity.lastIndexOf(',');
+            var cityCountry = itemCity.substring(0, indexOfPopulation);
+            var arrayCityCountry = cityCountry.split(', ').map(String);
+            var persentInCity = arrayCityCountry[0].toUpperCase().includes(searchString.toLocaleUpperCase());
+            var persentInCountry = arrayCityCountry[1].toUpperCase().includes(searchString.toLocaleUpperCase());
+            if (persentInCity || persentInCountry) {
                 document.getElementById("list-of-cities").innerHTML += `<li class="list-group-item">${itemCity}</li>`;
             }
         }
